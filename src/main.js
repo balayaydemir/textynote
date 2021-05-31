@@ -1,6 +1,10 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+// set env variables here for local development only - need to figure out solution for PRD
+// process.env.ELECTRON_WEBPACK_APP_MAGIC_PUBLISHABLE_KEY = bloop
+// process.env.ELECTRON_WEBPACK_APP_SERVER_URL = blop
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -11,6 +15,10 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
   });
 
   // and load the index.html of the app.
